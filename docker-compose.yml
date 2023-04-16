@@ -1,0 +1,26 @@
+version: "3"
+services:
+  app:
+    # Utilisez l'image construite à partir du Dockerfile précédent
+    build: .
+    # Montez le répertoire de travail de l'application dans le conteneur
+    volumes:
+      - .:/app
+    # Exposez le port 3000 sur l'hôte
+    ports:
+      - "8080:8080"
+    # Définissez les variables d'environnement pour la base de données MongoDB
+    environment:
+      - MONGO_URI=${MONGO_URI}
+    # Dépendez du service MongoDB pour s'assurer qu'il est disponible avant de démarrer l'application
+    depends_on:
+      - mongo
+  mongo:
+    # Utilisez l'image MongoDB officielle
+    image: mongo
+    # Montez le volume de données MongoDB dans le conteneur
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:

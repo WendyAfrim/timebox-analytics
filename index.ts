@@ -1,6 +1,8 @@
 import fastify from "fastify";
+import mongoose from "mongoose";
 
 const server = fastify();
+mongoose.connect(`${MONGO_URI}`, {});
 
 server.get("/ping", async (request, reply) => {
   return "pong\n";
@@ -14,14 +16,8 @@ server.listen({ port: 8080 }, (err, address) => {
   console.log(`Server listening at ${address}`);
 });
 
-// const fastify = require('fastify')();
-// const useragent = require('fastify-useragent');
-// const requestIp = require('fastify-request-ip');
-// const uuid = require('uuid');
-// const mongoose = require('mongoose');
-
-// // Connexion à la base de données MongoDB
-// mongoose.connect('mongodb://localhost:27017/mydatabase', { useNewUrlParser: true });
+//winston
+// us parser js
 
 // // Définition du schéma pour les informations de la requête
 // const requestSchema = new mongoose.Schema({
